@@ -1,0 +1,44 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: 17 17 17;
+  --background: 255 255 255;
+  --muted: 113 113 122;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground: 250 250 250;
+    --background: 9 9 11;
+    --muted: 161 161 170;
+  }
+}
+
+body {
+  color: rgb(var(--foreground));
+  background: rgb(var(--background));
+}
+
+.skip-link {
+  @apply absolute -top-10 left-4 z-50 bg-zinc-900 text-white px-3 py-1.5 text-sm;
+}
+
+.skip-link:focus {
+  @apply top-4;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  body {
+    color: black;
+    background: white;
+  }
+}
+
+*:focus-visible {
+  @apply outline-none ring-1 ring-zinc-400 ring-offset-2 ring-offset-white dark:ring-offset-zinc-950;
+}
