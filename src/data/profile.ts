@@ -52,141 +52,225 @@ export interface Profile {
 export const profile: Profile = {
   basics: {
     name: 'Jordan Bluhm',
-    label: 'Principal Product Manager — AI & Platform',
+    label: 'Principal Product Manager — AI',
     summary:
-      'Principal PM building AI-native platform and agent systems for subscription businesses. Focused on orchestration, tool design, retention workflows, and monetization in production.',
-    location: 'Denver, CO',
-    email: 'jordan@yourdomain.com', // TODO: Replace with actual email
-    url: 'https://jordanbluhm.com', // TODO: Replace with actual URL
+      'Principal-level Product Leader with 10+ years of experience building AI-native platforms, developer ecosystems, and enterprise SaaS products. Deeply technical, with a strong bias toward systems thinking, API design, and applied AI. Proven ability to translate emerging technologies (LLMs, agent frameworks, MCP, vector search) into scalable, revenue-generating products.',
+    location: 'Broomfield, CO',
+    email: 'jmbluhm@gmail.com',
+    url: 'https://jordanbluhm.com',
     profiles: [
       {
         network: 'LinkedIn',
-        username: 'your-handle', // TODO: Replace with actual handle
-        url: 'https://www.linkedin.com/in/your-handle', // TODO: Replace with actual URL
+        username: 'jordanmbluhm',
+        url: 'https://www.linkedin.com/in/jordanmbluhm/',
       },
       {
         network: 'GitHub',
-        username: 'your-handle', // TODO: Replace with actual handle
-        url: 'https://github.com/your-handle', // TODO: Replace with actual URL
+        username: 'jmbluhm',
+        url: 'https://github.com/jmbluhm',
       },
     ],
   },
   headlines: {
-    heroHeadline: 'Building AI-native products for subscription businesses',
+    heroHeadline: 'Building AI-native platforms for subscription businesses',
     heroSubhead:
-      'Principal Product Manager (AI) at Recurly. Agentic systems, retention, and monetization at scale.',
+      'Principal Product Manager (AI) at Recurly. Leading Compass, delivering agentic systems, MCP tooling, and AI-powered subscription management.',
     ctaHelper: 'Same data. Different render.',
   },
   capabilities: [
     {
-      title: 'AI Product Systems',
+      title: 'AI Systems & Platform Architecture',
       description:
-        'Agent architectures, MCP tooling, evals, and real production constraints. Not demos. Shipped systems.',
+        'LLM-based product design, agent orchestration, tool calling, vector search, and governance frameworks. Shipped systems, not demos.',
     },
     {
       title: 'Subscription & Monetization',
       description:
-        'Billing platforms, churn mechanics, pricing, lifecycle automation. Built in $10M → $100M+ ARR environments.',
+        'Scaled Recharge from $10M to $150M ARR. Billing platforms, churn mechanics, pricing, lifecycle automation at enterprise scale.',
     },
     {
-      title: 'Hands-on Prototyping',
+      title: 'Technical Product Leadership',
       description:
-        'Next.js, Supabase, APIs, MCP servers. I build to think, then scale.',
+        'Enterprise SaaS platforms, REST/RPC APIs, JavaScript SDKs. Translating architectural constraints into product strategy.',
     },
   ],
   proofBullets: [
-    'Leading AI platform strategy at Recurly',
-    'Owner of Compass AI (agent framework + product layer)',
-    'Shipped retention workflows used by real merchants',
-    'Deep experience in subscription commerce ecosystems',
+    'Leading Compass, Recurly\'s AI division — vision, architecture, and execution',
+    'Scaled Recharge platform from $10M to $150M ARR',
+    'Launched AI-powered subscription Concierge reducing churn and boosting AOV',
+    'Shipped enterprise-grade APIs and SDKs accelerating deal closures',
   ],
   nowBullets: [
-    "Designing agent boundaries that won't page SREs at 2am",
-    'Shipping retention + engagement workflows',
-    'Keeping systems legible for humans and machines',
+    'Shipping Recurly\'s merchant-facing AI assistant with Google Agent Developer Kit',
+    'Designing MCP-based secure agent architecture for AI automation',
+    'Building AI evaluation and governance pipelines for safe production rollout',
     'Tuning MTG Commander decks as a systems exercise',
   ],
   resume: {
     experience: [
       {
         company: 'Recurly',
-        title: 'Principal Product Manager, AI',
-        startDate: '2024',
+        title: 'Principal Product Manager – AI',
+        startDate: 'May 2025',
         endDate: 'Present',
         bullets: [
-          'Own AI platform strategy and roadmap (Compass)',
-          'Designed MCP-based agent architecture and tool gating',
-          'Delivered retention and engagement agent workflows to production',
-          'Partnered with data, infra, and GTM on AI monetization',
+          'Lead Compass, Recurly\'s AI division, owning vision, architecture, and execution of AI-powered subscription management tools',
+          'Launched merchant-facing AI assistant leveraging Google Agent Developer Kit for conversational access to documentation, API help, and account insights',
+          'Designed and shipped Recurly Admin MCP: secure, authenticated layer enabling AI agents to safely call Recurly APIs',
+          'Built and evangelized AI evaluation and governance pipeline for safe production rollout',
         ],
         expandedBullets: [
-          'Agent orchestration patterns, permissions, and failure modes',
-          'Eval design, quality metrics, and safe tool execution',
-          'Platform adoption across product teams and operating rhythms',
+          'Defined short, mid, and long-term AI product roadmap including dynamic dunning recommendations and anomaly-based triggers',
+          'Delivered executive presentations driving buy-in for AI investment aligned with regulatory and compliance constraints',
         ],
       },
       {
-        company: 'Prior Roles',
-        title: 'Senior / Group Product Manager — Subscription, Payments, Platforms',
-        startDate: '2015',
-        endDate: '2024',
+        company: 'Recharge Payments',
+        title: 'Principal Product Manager',
+        startDate: 'June 2022',
+        endDate: 'May 2025',
         bullets: [
-          'Scaled monetization-critical product surfaces in high-growth SaaS',
-          'Owned cross-functional delivery with engineering, sales, and support',
-          'Built deep domain expertise in subscription lifecycle and retention mechanics',
+          'Launched agentic, AI-powered Subscription Concierge using LLMs for conversational subscription management (email, SMS, chat)',
+          'Drove strategic vision and delivery of enterprise-grade APIs supporting $150M ARR and 500+ employees',
+          'Conceived and launched configurable workflow-builder UI enabling CPG brands to automate complex subscription flows without code',
         ],
         expandedBullets: [
-          'Led roadmap planning, KPI instrumentation, and launch execution',
-          'Worked across integrations, APIs, and platform reliability constraints',
+          'Increased average customer value by 66% while decreasing TCO',
+          'Served 20-person product team as technical leader and platform SME',
+        ],
+      },
+      {
+        company: 'Recharge Payments',
+        title: 'Senior Product Manager',
+        startDate: 'July 2021',
+        endDate: 'June 2022',
+        bullets: [
+          'Architected and delivered scalable REST/RPC APIs and JavaScript/React SDKs with configurable rate limits',
+          'Redefined solution architecture to complete critical 6-month project in 2 days, accelerating enterprise deal closures',
+          'Presented at annual merchant conferences, aligning product strategy with C-suite vision',
+        ],
+      },
+      {
+        company: 'Recharge Payments',
+        title: 'Product Manager',
+        startDate: 'December 2019',
+        endDate: 'July 2021',
+        bullets: [
+          'Led cross-functional initiatives implementing robust API versioning for 20+ resources',
+          'Extended platform reach through integrations with Shopify, Magento, BigCommerce, and custom commerce solutions',
+        ],
+      },
+      {
+        company: 'Sovos Compliance',
+        title: 'Product Manager',
+        startDate: 'November 2017',
+        endDate: 'December 2019',
+        bullets: [
+          'Owned product roadmap for global tax compliance SaaS solutions serving enterprise clients',
+          'Oversaw integration of tax determination and reporting APIs with leading ERP and eCommerce platforms',
+          'Established executive-level value matrices scoring integration and market opportunities',
+        ],
+      },
+      {
+        company: 'Sovos Compliance',
+        title: 'Product Associate',
+        startDate: 'April 2017',
+        endDate: 'November 2017',
+        bullets: [
+          'Developed requirements and user stories for tax compliance APIs in Python, PHP, and Java environments',
+          'Optimized performance for integrations with Oracle EBS, SAP Cloud ERP, Netsuite, and Magento',
+        ],
+      },
+      {
+        company: 'Sovos Compliance',
+        title: 'Program Coordinator',
+        startDate: 'January 2016',
+        endDate: 'April 2017',
+        bullets: [
+          'Managed development backlog for SCRUM team overseeing zero-to-one products in SMB tax compliance',
+        ],
+      },
+      {
+        company: 'Sidebench Studios',
+        title: 'Business Analyst',
+        startDate: 'August 2015',
+        endDate: 'January 2016',
+        bullets: [
+          'Translated user and client feedback into actionable engineering specs for iOS apps in medical insurance, warehouse management, and new media',
+        ],
+      },
+      {
+        company: 'Apple Inc.',
+        title: 'Technical Specialist',
+        startDate: 'May 2014',
+        endDate: 'April 2015',
+        bullets: [
+          'Provided technical training, support and repair service while maintaining personal NPS score of 90%+',
         ],
       },
     ],
     skills: [
       {
-        category: 'Product',
+        category: 'AI & ML',
         items: [
-          'AI systems design',
-          'Platform strategy',
-          'Monetization & pricing',
-          'Subscription lifecycle',
-          'Technical roadmapping',
+          'LLM-powered chat systems',
+          'Agentic architectures',
+          'Model Context Protocol (MCP)',
+          'Vector databases & embeddings',
+          'Prompt design & evaluation',
         ],
       },
       {
-        category: 'Technical',
+        category: 'Product Strategy',
         items: [
-          'MCP / agent tooling',
-          'Next.js / Node',
-          'Supabase / Postgres',
-          'API design',
-          'Rapid prototyping',
+          'Executive-level roadmapping',
+          'Revenue growth ($10M → $150M ARR)',
+          'KPI definition & experimentation',
+          'Cross-functional leadership',
+          'Technical storytelling',
+        ],
+      },
+      {
+        category: 'Engineering & Platforms',
+        items: [
+          'REST & RPC API design',
+          'JavaScript/TypeScript SDKs',
+          'SaaS platform architecture',
+          'Payments & subscriptions',
+          'Data modeling',
+        ],
+      },
+      {
+        category: 'Tools & Infrastructure',
+        items: [
+          'Cursor, Claude Code, OpenAI',
+          'Google Agent Developer Kit',
+          'SQL, BigQuery, BI tooling',
+          'GitHub, Vercel, Supabase',
         ],
       },
     ],
     sideProjects: [
       {
-        name: 'Krengl',
-        description: 'Shared wish list platform',
-        stack: ['Next.js', 'TypeScript', 'Supabase', 'RLS'],
-      },
-      {
         name: 'Aisl',
-        description: 'AI-native meal planning and grocery optimization',
+        description: 'AI-powered meal planning and grocery intelligence platform. Designing LLM-driven planning workflows, structured data extraction, and cost-aware AI pipelines.',
         stack: ['Next.js', 'Supabase', 'LLMs'],
       },
       {
-        name: 'Agent & MCP experiments',
-        description: 'Tool design, orchestration, evals',
+        name: 'Krengl',
+        description: 'Shared wish-list and gift coordination platform with complex domain logic around visibility, reservations, and real-time notifications.',
+        stack: ['Next.js', 'TypeScript', 'Supabase', 'RLS'],
       },
       {
-        name: 'MTG tooling',
-        description: 'Data pipelines, embeddings, strategy analysis',
+        name: 'CmdrGPT',
+        description: 'AI-powered domain assistant for Magic: The Gathering rules and card intelligence. Built RAG system with continuous data ingestion, embedding pipelines, and vector search.',
+        stack: ['RAG', 'Vector Search', 'Agent Orchestration', 'Tool Calling'],
       },
     ],
   },
   contact: {
     headline: 'Reach me',
     openTo:
-      'Open to: AI/ML product roles, advisory, and interesting platform problems.',
+      'Open to: AI/ML product leadership roles, advisory, and interesting platform problems. Remote-open.',
   },
 }
