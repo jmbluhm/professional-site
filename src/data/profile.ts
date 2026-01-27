@@ -86,7 +86,7 @@ export const profile: Profile = {
     {
       title: 'Subscription & Monetization',
       description:
-        'Scaled Recharge from $10M to $150M ARR. Billing platforms, churn mechanics, pricing, lifecycle automation at enterprise scale.',
+        'Scaled Recharge from $10M to $100M+ ARR. Billing platforms, churn mechanics, pricing, lifecycle automation at enterprise scale.',
     },
     {
       title: 'Technical Product Leadership',
@@ -96,7 +96,7 @@ export const profile: Profile = {
   ],
   proofBullets: [
     'Leading Compass, Recurly\'s AI division — vision, architecture, and execution',
-    'Scaled Recharge platform from $10M to $150M ARR',
+    'Scaled Recharge platform from $10M to $100M+ ARR',
     'Launched AI-powered subscription Concierge reducing churn and boosting AOV',
     'Shipped enterprise-grade APIs and SDKs accelerating deal closures',
   ],
@@ -131,7 +131,7 @@ export const profile: Profile = {
         endDate: 'May 2025',
         bullets: [
           'Launched agentic, AI-powered Subscription Concierge using LLMs for conversational subscription management (email, SMS, chat)',
-          'Drove strategic vision and delivery of enterprise-grade APIs supporting $150M ARR and 500+ employees',
+          'Drove strategic vision and delivery of enterprise-grade APIs supporting $100M+ ARR and 500+ employees',
           'Conceived and launched configurable workflow-builder UI enabling CPG brands to automate complex subscription flows without code',
         ],
         expandedBullets: [
@@ -224,7 +224,7 @@ export const profile: Profile = {
         category: 'Product Strategy',
         items: [
           'Executive-level roadmapping',
-          'Revenue growth ($10M → $150M ARR)',
+          'Revenue growth ($10M → $100M+ ARR)',
           'KPI definition & experimentation',
           'Cross-functional leadership',
           'Technical storytelling',
@@ -252,11 +252,6 @@ export const profile: Profile = {
     ],
     sideProjects: [
       {
-        name: 'Aisl',
-        description: 'AI-powered meal planning and grocery intelligence platform. Designing LLM-driven planning workflows, structured data extraction, and cost-aware AI pipelines.',
-        stack: ['Next.js', 'Supabase', 'LLMs'],
-      },
-      {
         name: 'Krengl',
         description: 'Shared wish-list and gift coordination platform with complex domain logic around visibility, reservations, and real-time notifications.',
         stack: ['Next.js', 'TypeScript', 'Supabase', 'RLS'],
@@ -265,6 +260,11 @@ export const profile: Profile = {
         name: 'CmdrGPT',
         description: 'AI-powered domain assistant for Magic: The Gathering rules and card intelligence. Built RAG system with continuous data ingestion, embedding pipelines, and vector search.',
         stack: ['RAG', 'Vector Search', 'Agent Orchestration', 'Tool Calling'],
+      },
+      {
+        name: 'Aisl',
+        description: 'AI-powered meal planning and grocery intelligence platform. Designing LLM-driven planning workflows, structured data extraction, and cost-aware AI pipelines.',
+        stack: ['Next.js', 'Supabase', 'LLMs'],
       },
     ],
   },

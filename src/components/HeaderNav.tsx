@@ -3,6 +3,7 @@ import { Container } from './Container'
 
 const navItems = [
   { href: '/resume', label: 'Resume' },
+  { href: '/work', label: 'Work' },
   { href: '/now', label: 'Now' },
   { href: '/contact', label: 'Contact' },
 ]
