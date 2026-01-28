@@ -55,7 +55,7 @@ export default function Home() {
       <PersonJsonLd />
       <ConsoleEasterEgg />
       <Container>
-        <div className="mb-16">
+        <div className="mb-8">
           <a
             href="/content/chatgpt-perspective"
             className="flex items-center gap-2 font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
