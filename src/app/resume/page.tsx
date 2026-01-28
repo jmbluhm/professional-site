@@ -7,11 +7,39 @@ import { profile } from '@/data/profile'
 export const metadata: Metadata = {
   title: 'Resume',
   description: `Professional resume for ${profile.basics.name}, ${profile.basics.label}`,
+  alternates: {
+    canonical: '/resume',
+  },
+}
+
+function ResumeJsonLd() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Resume',
+    description: `Professional resume for ${profile.basics.name}`,
+    url: 'https://www.jordanmbluhm.com/resume',
+    about: {
+      '@type': 'Person',
+      name: profile.basics.name,
+      jobTitle: profile.basics.label,
+      url: 'https://www.jordanmbluhm.com',
+    },
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  )
 }
 
 export default function ResumePage() {
   return (
-    <Container>
+    <>
+      <ResumeJsonLd />
+      <Container>
       <header className="mb-12">
         <h1 className="text-3xl font-medium text-zinc-900 dark:text-zinc-100 mb-1">
           {profile.basics.name}
@@ -124,5 +152,6 @@ export default function ResumePage() {
         </div>
       </section>
     </Container>
+    </>
   )
 }

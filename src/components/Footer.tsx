@@ -4,9 +4,9 @@ import { profile } from '@/data/profile'
 
 export function Footer() {
   return (
-    <footer className="py-16 mt-auto no-print">
+    <footer aria-label="Site footer" className="py-16 mt-auto no-print">
       <Container>
-        <div className="flex items-center gap-6 text-sm text-zinc-500 dark:text-zinc-400">
+        <nav aria-label="Social media and contact links" className="flex items-center gap-6 text-sm text-zinc-500 dark:text-zinc-400">
           {profile.basics.profiles.map((p) => (
             <a
               key={p.network}
@@ -26,7 +26,7 @@ export function Footer() {
               Email
             </a>
           )}
-        </div>
+        </nav>
       </Container>
     </footer>
   )

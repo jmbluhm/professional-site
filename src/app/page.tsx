@@ -3,20 +3,49 @@ import { ConsoleEasterEgg } from '@/components/ConsoleEasterEgg.client'
 import { profile } from '@/data/profile'
 
 function PersonJsonLd() {
-  const jsonLd = {
+  const personLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: profile.basics.name,
     jobTitle: profile.basics.label,
-    url: profile.basics.url,
+    url: 'https://www.jordanmbluhm.com',
+    email: profile.basics.email,
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Broomfield',
+      addressRegion: 'CO',
+    },
     sameAs: profile.basics.profiles.map((p) => p.url),
+    description: profile.basics.summary,
+  }
+
+  const websiteLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: `${profile.basics.name} - Portfolio`,
+    url: 'https://www.jordanmbluhm.com',
+    description: profile.basics.summary,
+    author: {
+      '@type': 'Person',
+      name: profile.basics.name,
+    },
+    publisher: {
+      '@type': 'Person',
+      name: profile.basics.name,
+    },
   }
 
   return (
-    <script
-      type="application/ld+json"
-      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteLd) }}
+      />
+    </>
   )
 }
 

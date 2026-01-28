@@ -12,7 +12,7 @@ export function HeaderNav() {
   return (
     <header className="py-8 no-print">
       <Container>
-        <nav className="flex items-center justify-between">
+        <nav aria-label="Primary navigation" className="flex items-center justify-between">
           <Link
             href="/"
             className="text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"

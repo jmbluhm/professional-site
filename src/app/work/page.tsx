@@ -5,6 +5,9 @@ import { profile } from '@/data/profile'
 export const metadata: Metadata = {
   title: 'Work',
   description: `Projects and writing by ${profile.basics.name}`,
+  alternates: {
+    canonical: '/work',
+  },
 }
 
 const writingArticles = [
@@ -34,9 +37,33 @@ const writingArticles = [
   },
 ]
 
+function WorkJsonLd() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: 'Work',
+    description: `Projects and writing by ${profile.basics.name}`,
+    url: 'https://www.jordanmbluhm.com/work',
+    author: {
+      '@type': 'Person',
+      name: profile.basics.name,
+      url: 'https://www.jordanmbluhm.com',
+    },
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  )
+}
+
 export default function WorkPage() {
   return (
-    <Container>
+    <>
+      <WorkJsonLd />
+      <Container>
       <section className="mb-16">
         <h1 className="text-2xl font-medium text-zinc-900 dark:text-zinc-100 mb-8">
           Projects
@@ -103,5 +130,6 @@ export default function WorkPage() {
         </div>
       </section>
     </Container>
+    </>
   )
 }

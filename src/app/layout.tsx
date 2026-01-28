@@ -13,6 +13,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.jordanmbluhm.com'),
   title: {
     default: `${profile.basics.name} — ${profile.basics.label}`,
     template: `%s — ${profile.basics.name}`,
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: `${profile.basics.name} — ${profile.basics.label}`,
     description: profile.basics.summary,
-    url: profile.basics.url,
+    url: 'https://www.jordanmbluhm.com',
     siteName: profile.basics.name,
     locale: 'en_US',
     type: 'website',
@@ -35,6 +36,9 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  alternates: {
+    canonical: '/',
+  },
 }
 
 export default function RootLayout({
@@ -45,6 +49,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <head>
+        <link rel="me" href="https://www.linkedin.com/in/jordanmbluhm/" />
+        <link rel="me" href="https://github.com/jmbluhm" />
         <script
           dangerouslySetInnerHTML={{
             __html: `

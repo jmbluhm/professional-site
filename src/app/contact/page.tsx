@@ -5,11 +5,39 @@ import { profile } from '@/data/profile'
 export const metadata: Metadata = {
   title: 'Contact',
   description: `Get in touch with ${profile.basics.name}`,
+  alternates: {
+    canonical: '/contact',
+  },
+}
+
+function ContactJsonLd() {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ContactPage',
+    name: 'Contact',
+    description: `Get in touch with ${profile.basics.name}`,
+    url: 'https://www.jordanmbluhm.com/contact',
+    mainEntity: {
+      '@type': 'Person',
+      name: profile.basics.name,
+      email: profile.basics.email,
+      url: 'https://www.jordanmbluhm.com',
+    },
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  )
 }
 
 export default function ContactPage() {
   return (
-    <Container>
+    <>
+      <ContactJsonLd />
+      <Container>
       <header className="mb-8">
         <h1 className="text-3xl font-medium text-zinc-900 dark:text-zinc-100 mb-2">
           {profile.contact.headline}
@@ -46,5 +74,6 @@ export default function ContactPage() {
         </ul>
       </section>
     </Container>
+    </>
   )
 }
