@@ -49,6 +49,12 @@ export async function GET() {
       priority: 0.6,
     },
     {
+      loc: `${baseUrl}/resume.md`,
+      lastmod: currentDate,
+      changefreq: 'monthly',
+      priority: 0.6,
+    },
+    {
       loc: `${baseUrl}/content/chatgpt-perspective`,
       lastmod: currentDate,
       changefreq: 'yearly',

@@ -36,6 +36,10 @@ JSON Resume format (https://jsonresume.org/) for programmatic access.
 https://www.jordanmbluhm.com/resume.txt
 Plain text resume format optimized for LLM consumption.
 
+### Markdown Resume (/resume.md)
+https://www.jordanmbluhm.com/resume.md
+Markdown-formatted resume for download and version control.
+
 ## Content Pages
 
 ### ChatGPT Perspective (/content/chatgpt-perspective)
