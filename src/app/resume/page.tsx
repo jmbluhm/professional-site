@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Container } from '@/components/Container'
 import { TimelineItem } from '@/components/TimelineItem'
 import { Tags } from '@/components/Tags'
-import { PrintButton } from '@/components/PrintButton.client'
+import { DownloadResumeButton } from '@/components/DownloadResumeButton.client'
 import { profile } from '@/data/profile'
 
 export const metadata: Metadata = {
@@ -20,14 +20,8 @@ export default function ResumePage() {
         <p className="text-zinc-500 dark:text-zinc-400 mb-6">
           {profile.basics.label}
         </p>
-        <div className="flex items-center gap-4 text-sm no-print">
-          <a
-            href="/resume.json"
-            className="text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
-          >
-            JSON
-          </a>
-          <PrintButton />
+        <div className="no-print">
+          <DownloadResumeButton />
         </div>
       </header>
 

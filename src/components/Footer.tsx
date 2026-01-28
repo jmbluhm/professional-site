@@ -26,12 +26,6 @@ export function Footer() {
               Email
             </a>
           )}
-          <Link
-            href="/resume.json"
-            className="hover:text-zinc-900 dark:hover:text-zinc-100"
-          >
-            JSON
-          </Link>
         </div>
       </Container>
     </footer>

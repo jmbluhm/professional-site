@@ -57,7 +57,7 @@ export const profile: Profile = {
       'Principal-level Product Leader with 10+ years of experience building AI-native platforms, developer ecosystems, and enterprise SaaS products. Deeply technical, with a strong bias toward systems thinking, API design, and applied AI. Proven ability to translate emerging technologies (LLMs, agent frameworks, MCP, vector search) into scalable, revenue-generating products.',
     location: 'Broomfield, CO',
     email: 'jmbluhm@gmail.com',
-    url: 'https://jordanbluhm.com',
+    url: 'https://jordanmbluhm.com',
     profiles: [
       {
         network: 'LinkedIn',
