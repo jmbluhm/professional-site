@@ -255,6 +255,13 @@ export const profile: Profile = {
         name: 'Krengl',
         description: 'Shared wish-list and gift coordination platform with complex domain logic around visibility, reservations, and real-time notifications.',
         stack: ['Next.js', 'TypeScript', 'Supabase', 'RLS'],
+        url: 'https://krengl.com',
+      },
+      {
+        name: 'B2B Sales Skills',
+        description: 'Open-source library of 27 enterprise sales methodologies packaged as Agent Skills. Research-backed frameworks for AI agents covering discovery, qualification, objection handling, and closing.',
+        stack: ['Agent Skills', 'MCP', 'Claude Code'],
+        url: 'https://github.com/jmbluhm/b2b-sales-skills',
       },
       {
         name: 'CmdrGPT',
