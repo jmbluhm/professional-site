@@ -42,9 +42,6 @@ export default function ContactPage() {
         <h1 className="text-3xl font-medium text-zinc-900 dark:text-zinc-100 mb-2">
           {profile.contact.headline}
         </h1>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
-          {profile.contact.openTo}
-        </p>
       </header>
 
       <section>
