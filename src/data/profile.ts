@@ -99,7 +99,7 @@ export const profile: Profile = {
     'Studying and shaping protocols for AI-to-system connectivity (MCP, agents, tooling)',
     'Rapid prototyping wherever it\'s useful: code, laser cutting, 3D printing',
     'Tuning and playtesting Magic: The Gathering decks with The Fancy Cardboard Club',
-    'Getting outside with my wife and dogs',
+    'Getting outside with my wife and our dogs',
   ],
   nowBullets: [
     'Shipping Recurly\'s merchant-facing AI assistant with Google Agent Developer Kit',

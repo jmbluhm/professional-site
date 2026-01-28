@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Container } from './Container'
+import { ShareButton } from './ShareButton.client'
 import { profile } from '@/data/profile'
 
 export function Footer() {
@@ -23,9 +24,10 @@ export function Footer() {
               href={`mailto:${profile.basics.email}`}
               className="hover:text-zinc-900 dark:hover:text-zinc-100"
             >
-              Email
+              Email Me
             </a>
           )}
+          <ShareButton />
         </nav>
       </Container>
     </footer>

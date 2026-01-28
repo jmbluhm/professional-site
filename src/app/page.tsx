@@ -152,7 +152,7 @@ export default function Home() {
               <em>The Fancy Cardboard Club</em>
             </li>
             <li className="text-sm text-zinc-700 dark:text-zinc-300">
-              Getting outside with my wife and dogs
+              Getting outside with my wife and our dogs
             </li>
           </ul>
         </section>
