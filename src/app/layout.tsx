@@ -44,6 +44,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={inter.variable}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = localStorage.getItem('theme') || 'light';
+                document.documentElement.classList.toggle('dark', theme === 'dark');
+              })();
+            `,
+          }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-white dark:bg-zinc-950 font-sans antialiased">
         <a href="#main" className="skip-link">
           Skip to main content

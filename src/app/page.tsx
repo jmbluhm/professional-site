@@ -65,7 +65,7 @@ export default function Home() {
             <div>
               <a
                 href="/resume.json"
-                className="flex items-center gap-2 hover:text-zinc-600 dark:hover:text-zinc-400"
+                className="flex items-center gap-2 font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
                 style={{ color: '#D97757' }}
               >
                 <svg
@@ -87,14 +87,60 @@ export default function Home() {
             Currently
           </h2>
           <ul className="space-y-2">
-            {profile.proofBullets.map((bullet, index) => (
-              <li
-                key={index}
-                className="text-sm text-zinc-700 dark:text-zinc-300"
+            <li className="text-sm text-zinc-700 dark:text-zinc-300">
+              Leading{' '}
+              <a
+                href="https://recurly.com/product/recurly-compass/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
               >
-                {bullet}
-              </li>
-            ))}
+                Compass
+              </a>
+              , Recurly&apos;s AI platform — vision, architecture, and launches
+            </li>
+            <li className="text-sm text-zinc-700 dark:text-zinc-300">
+              Studying and shaping protocols for AI-to-system connectivity (
+              <a
+                href="https://www.linkedin.com/pulse/mcp-user-guide-your-ai-product-needs-jordan-bluhm-hxxfc"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
+              >
+                MCP
+              </a>
+              , agents,{' '}
+              <a
+                href="https://agentskills.io/home"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
+              >
+                skills
+              </a>
+              , tooling)
+            </li>
+            <li className="text-sm text-zinc-700 dark:text-zinc-300">
+              Rapid prototyping wherever it&apos;s useful:{' '}
+              <a
+                href="/flow"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
+              >
+                code
+              </a>
+              , laser cutting, 3D printing
+            </li>
+            <li className="text-sm text-zinc-700 dark:text-zinc-300">
+              Tuning and playtesting Magic: The Gathering decks with{' '}
+              <em>The Fancy Cardboard Club</em>
+            </li>
+            <li className="text-sm text-zinc-700 dark:text-zinc-300">
+              Getting outside with my wife and dogs whenever possible
+            </li>
           </ul>
         </section>
       </Container>

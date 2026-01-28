@@ -72,7 +72,7 @@ export default function WorkPage() {
 
       <section>
         <h1 className="text-2xl font-medium text-zinc-900 dark:text-zinc-100 mb-8">
-          Writing
+          Writing & Guides
         </h1>
         <div className="space-y-6">
           {writingArticles.map((article) => (
@@ -81,7 +81,7 @@ export default function WorkPage() {
                 href={article.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400"
+                className={`flex items-center gap-2 text-zinc-900 dark:text-zinc-100 hover:text-zinc-600 dark:hover:text-zinc-400 ${article.title === 'My low cost prototyping pipeline' ? 'font-medium' : ''}`}
                 style={article.title === 'My low cost prototyping pipeline' ? { color: '#D97757' } : undefined}
               >
                 <svg

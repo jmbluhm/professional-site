@@ -79,7 +79,7 @@ export function DownloadResumeButton() {
   return (
     <button
       onClick={handleDownload}
-      className="text-sm hover:text-zinc-600 dark:hover:text-zinc-400"
+      className="text-sm font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
       style={{ color: '#D97757' }}
     >
       Download resume.md

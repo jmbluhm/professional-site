@@ -43,8 +43,26 @@ export default function FlowPage() {
 
             <div className="space-y-4 mb-8">
               <div>
-                <h5 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">
-                  VS Code + Claude Code
+                <h5 className="text-sm mb-2">
+                  <a
+                    href="https://code.visualstudio.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                    style={{ color: '#D97757' }}
+                  >
+                    VS Code
+                  </a>
+                  {' + '}
+                  <a
+                    href="https://claude.com/product/claude-code"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                    style={{ color: '#D97757' }}
+                  >
+                    Claude Code
+                  </a>
                 </h5>
                 <p className="text-sm text-zinc-700 dark:text-zinc-300">
                   VS Code is the editor, Claude Code is the AI pair programmer that lives inside it. I use a Claude Pro or Max subscription to power it. The combination means I can describe what I want in plain English and get working code, then iterate rapidly. It's like having a senior developer who never gets tired and knows every framework.
@@ -52,8 +70,16 @@ export default function FlowPage() {
               </div>
 
               <div>
-                <h5 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">
-                  Supabase
+                <h5 className="text-sm mb-2">
+                  <a
+                    href="https://supabase.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                    style={{ color: '#D97757' }}
+                  >
+                    Supabase
+                  </a>
                 </h5>
                 <p className="text-sm text-zinc-700 dark:text-zinc-300">
                   My database and backend. It's PostgreSQL under the hood, but it gives me auth, real-time subscriptions, storage, and edge functions without configuring servers. I set it up once per project, design my schema in SQL, and I'm done. No separate auth service, no separate storage solution, no separate API layer to build.
@@ -61,8 +87,16 @@ export default function FlowPage() {
               </div>
 
               <div>
-                <h5 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">
-                  GitHub
+                <h5 className="text-sm mb-2">
+                  <a
+                    href="https://github.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                    style={{ color: '#D97757' }}
+                  >
+                    GitHub
+                  </a>
                 </h5>
                 <p className="text-sm text-zinc-700 dark:text-zinc-300">
                   Version control and the bridge between my local machine and production. Every project lives in a repo. Every commit is tracked. Every change has history.
@@ -70,8 +104,16 @@ export default function FlowPage() {
               </div>
 
               <div>
-                <h5 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">
-                  Vercel
+                <h5 className="text-sm mb-2">
+                  <a
+                    href="https://vercel.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                    style={{ color: '#D97757' }}
+                  >
+                    Vercel
+                  </a>
                 </h5>
                 <p className="text-sm text-zinc-700 dark:text-zinc-300">
                   Where things get deployed. It connects directly to GitHub, watches my repo, and automatically deploys every push to main. It handles SSL, gives me a global CDN, manages environment variables, and creates preview URLs for every branch. No server configuration, no DevOps headaches.
@@ -79,11 +121,22 @@ export default function FlowPage() {
               </div>
 
               <div>
-                <h5 className="text-sm font-medium text-zinc-900 dark:text-zinc-100 mb-2">
-                  GoDaddy
+                <h5 className="text-sm mb-2">
+                  <a
+                    href="https://godaddy.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                    style={{ color: '#D97757' }}
+                  >
+                    GoDaddy
+                  </a>
                 </h5>
-                <p className="text-sm text-zinc-700 dark:text-zinc-300">
+                <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-2">
                   (or any DNS provider) is where I buy domains. Once I have a domain, I point it at Vercel with a few DNS records and I'm done.
+                </p>
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 italic">
+                  I only do this when I want to control the URL for my prototype or application. This is the last step, the step that makes it feel "real"
                 </p>
               </div>
             </div>
@@ -375,11 +428,80 @@ git push
           </h2>
 
           <div className="space-y-2 text-sm text-zinc-700 dark:text-zinc-300 mb-6">
-            <p><strong>Build:</strong> VS Code + Claude Code + Node.js</p>
-            <p><strong>Database:</strong> Supabase (PostgreSQL + Auth + Storage)</p>
-            <p><strong>Version Control:</strong> Git + GitHub</p>
-            <p><strong>Hosting:</strong> Vercel (with automatic deployments)</p>
-            <p><strong>Domain:</strong> GoDaddy (or any DNS provider)</p>
+            <p>
+              <strong>Build:</strong>{' '}
+              <a
+                href="https://code.visualstudio.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
+              >
+                VS Code
+              </a>
+              {' + '}
+              <a
+                href="https://claude.com/product/claude-code"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
+              >
+                Claude Code
+              </a>
+              {' + Node.js'}
+            </p>
+            <p>
+              <strong>Database:</strong>{' '}
+              <a
+                href="https://supabase.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
+              >
+                Supabase
+              </a>
+              {' (PostgreSQL + Auth + Storage)'}
+            </p>
+            <p>
+              <strong>Version Control:</strong> Git +{' '}
+              <a
+                href="https://github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
+              >
+                GitHub
+              </a>
+            </p>
+            <p>
+              <strong>Hosting:</strong>{' '}
+              <a
+                href="https://vercel.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
+              >
+                Vercel
+              </a>
+              {' (with automatic deployments)'}
+            </p>
+            <p>
+              <strong>Domain:</strong>{' '}
+              <a
+                href="https://godaddy.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+                style={{ color: '#D97757' }}
+              >
+                GoDaddy
+              </a>
+              {' (or any DNS provider)'}
+            </p>
           </div>
 
           <div className="bg-zinc-50 dark:bg-zinc-900 rounded-lg p-6 mb-6">

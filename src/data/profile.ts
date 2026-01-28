@@ -95,10 +95,11 @@ export const profile: Profile = {
     },
   ],
   proofBullets: [
-    'Leading Compass, Recurly\'s AI division — vision, architecture, and execution',
-    'Scaled Recharge platform from $10M to $100M+ ARR',
-    'Launched AI-powered subscription Concierge reducing churn and boosting AOV',
-    'Shipped enterprise-grade APIs and SDKs accelerating deal closures',
+    'Leading Compass, Recurly\'s AI platform — vision, architecture, and launches',
+    'Studying and shaping protocols for AI-to-system connectivity (MCP, agents, tooling)',
+    'Rapid prototyping wherever it\'s useful: code, laser cutting, 3D printing',
+    'Tuning and playtesting Magic: The Gathering decks with The Fancy Cardboard Club',
+    'Getting outside with my wife and dogs whenever possible',
   ],
   nowBullets: [
     'Shipping Recurly\'s merchant-facing AI assistant with Google Agent Developer Kit',
