@@ -258,7 +258,7 @@ export const profile: Profile = {
         url: 'https://krengl.com',
       },
       {
-        name: 'B2B Sales Skills',
+        name: 'Sales Agent Skill Library',
         description: 'Open-source library of 27 enterprise sales methodologies packaged as Agent Skills. Research-backed frameworks for AI agents covering discovery, qualification, objection handling, and closing.',
         stack: ['Agent Skills', 'MCP', 'Claude Code'],
         url: 'https://github.com/jmbluhm/b2b-sales-skills',
