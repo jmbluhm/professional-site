@@ -136,7 +136,7 @@ export default function FlowPage() {
                   (or any DNS provider) is where I buy domains. Once I have a domain, I point it at Vercel with a few DNS records and I'm done.
                 </p>
                 <p className="text-sm text-zinc-600 dark:text-zinc-400 italic">
-                  I only do this when I want to control the URL for my prototype or application. This is the last step, the step that makes it feel "real"
+                  I only do this when I want to control the URL for my prototype or application. This is the last step, the step that makes it feel "real".
                 </p>
               </div>
             </div>
