@@ -64,19 +64,6 @@ export default function Home() {
           </p>
         </section>
 
-        <section className="mb-16 space-y-8">
-          {profile.capabilities.map((cap) => (
-            <div key={cap.title}>
-              <h2 className="font-medium text-zinc-900 dark:text-zinc-100 mb-1">
-                {cap.title}
-              </h2>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400">
-                {cap.description}
-              </p>
-            </div>
-          ))}
-        </section>
-
         <div className="mb-16">
           <a
             href="/content/chatgpt-perspective"
@@ -94,6 +81,19 @@ export default function Home() {
             I asked ChatGPT what it&apos;s like to work with me
           </a>
         </div>
+
+        <section className="mb-16 space-y-8">
+          {profile.capabilities.map((cap) => (
+            <div key={cap.title}>
+              <h2 className="font-medium text-zinc-900 dark:text-zinc-100 mb-1">
+                {cap.title}
+              </h2>
+              <p className="text-sm text-zinc-600 dark:text-zinc-400">
+                {cap.description}
+              </p>
+            </div>
+          ))}
+        </section>
 
         <section>
           <h2 className="text-xl font-medium text-zinc-900 dark:text-zinc-100 mb-4">
