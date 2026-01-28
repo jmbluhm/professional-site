@@ -55,15 +55,6 @@ export default function Home() {
       <PersonJsonLd />
       <ConsoleEasterEgg />
       <Container>
-        <section className="mb-16">
-          <h1 className="text-3xl font-medium text-zinc-900 dark:text-zinc-100 mb-4">
-            {profile.headlines.heroHeadline}
-          </h1>
-          <p className="text-zinc-600 dark:text-zinc-400 mb-8">
-            {profile.headlines.heroSubhead}
-          </p>
-        </section>
-
         <div className="mb-16">
           <a
             href="/content/chatgpt-perspective"
@@ -81,6 +72,15 @@ export default function Home() {
             I asked ChatGPT what it&apos;s like to work with me
           </a>
         </div>
+
+        <section className="mb-16">
+          <h1 className="text-3xl font-medium text-zinc-900 dark:text-zinc-100 mb-4">
+            {profile.headlines.heroHeadline}
+          </h1>
+          <p className="text-zinc-600 dark:text-zinc-400 mb-8">
+            {profile.headlines.heroSubhead}
+          </p>
+        </section>
 
         <section className="mb-16 space-y-8">
           {profile.capabilities.map((cap) => (
