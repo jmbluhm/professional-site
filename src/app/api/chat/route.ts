@@ -316,6 +316,41 @@ function getCTA(): string {
 }
 
 // ============================================================================
+// Citation Stripping and Confidence Phrasing
+// ============================================================================
+
+function stripRetrievalCitations(text: string): string {
+  // Removes patterns like 【0:0†source】 that sometimes appear in retrieved answers
+  return text.replace(/【\d+:\d+†[^】]+】/g, '').replace(/\n{3,}/g, '\n\n').trim()
+}
+
+function applyConfidencePhrasing(answer: string, confidence: 'high' | 'medium' | 'low'): string {
+  const a = answer.trim()
+  if (!a) return a
+
+  // Don't touch refusals, knowledge-miss, or clarifying questions
+  const lower = a.toLowerCase()
+  const isClarifying = a.endsWith('?') && (lower.includes("do you mean") || lower.includes("are you asking") || lower.includes("when you say"))
+  const isKnowledgeMiss = lower.includes("i don't have that specific information in my knowledge base")
+  if (isClarifying || isKnowledgeMiss) return a
+
+  if (confidence === 'low') {
+    // Add a small hedge prefix only if not already hedged
+    if (!/^(it seems|it appears|from what i have|based on my knowledge base|i believe)/i.test(a)) {
+      return `Based on my current knowledge base, ${a[0].toLowerCase()}${a.slice(1)}`
+    }
+  }
+
+  if (confidence === 'medium') {
+    if (!/^(generally|typically|in most cases|often)/i.test(a)) {
+      return `Generally, ${a[0].toLowerCase()}${a.slice(1)}`
+    }
+  }
+
+  return a
+}
+
+// ============================================================================
 // System Prompt for Retrieval-Augmented Generation
 // ============================================================================
 
@@ -551,8 +586,14 @@ export async function POST(request: NextRequest) {
       max_output_tokens: MAX_OUTPUT_TOKENS,
     })
 
-    // Extract answer from response
-    let answer = resp.output_text?.trim() || ''
+    // Extract answer from response - preserve raw for logging, then strip citations
+    const rawAnswer = resp.output_text?.trim() || ''
+
+    // Log raw answer (truncated) for internal debugging
+    console.log('[Chat API] Raw answer (truncated):', rawAnswer.slice(0, 400))
+
+    // Strip retrieval citations that should never be shown to users
+    let answer = stripRetrievalCitations(rawAnswer)
 
     // Fallback if no output generated
     if (!answer) {
@@ -628,6 +669,18 @@ export async function POST(request: NextRequest) {
        lower.includes('which') ||
        lower.includes('could you clarify'))
 
+    // Detect knowledge-miss responses
+    const isKnowledgeMiss =
+      lower.includes("i don't have that specific information in my knowledge base") ||
+      lower.includes("i don't have that information in my knowledge base")
+
+    // Determine response confidence level
+    const responseConfidence: 'high' | 'medium' | 'low' =
+      (isKnowledgeMiss || isWrongReferent) ? 'low' : 'high'
+
+    // Apply confidence-aware phrasing (before CTA append)
+    answer = applyConfidencePhrasing(answer, responseConfidence)
+
     // Ensure CTA is present (append unless direct contact method already included OR it's a clarifying question)
     const cta = getCTA()
     const hasDirectContact =
@@ -638,11 +691,6 @@ export async function POST(request: NextRequest) {
     if (!hasDirectContact && !isClarifyingQuestion) {
       answer = `${answer}\n\n${cta}`
     }
-
-    // Detect knowledge-miss responses
-    const isKnowledgeMiss =
-      lower.includes("i don't have that specific information in my knowledge base") ||
-      lower.includes("i don't have that information in my knowledge base")
 
     // Increment session count
     const newCount = await incrementSession(sessionId)
@@ -660,7 +708,7 @@ export async function POST(request: NextRequest) {
     const response: ChatResponse = {
       answerMarkdown: answer,
       refused: isKnowledgeMiss || isWrongReferent,
-      confidence: (isKnowledgeMiss || isWrongReferent) ? 'low' : (isClarifyingQuestion ? 'high' : 'high'),
+      confidence: responseConfidence,
       cta,
       sessionId,
       messagesRemaining: MAX_MESSAGES_PER_SESSION - newCount,
@@ -749,3 +797,33 @@ export async function GET() {
 //
 // Expected: Answer about chatbot implementation OR knowledge-miss (NOT Compass)
 // Expected: If knowledge-miss: refused=true, confidence="low"
+//
+// ============================================================================
+// Citation Stripping & Confidence Phrasing Tests
+// ============================================================================
+//
+// Test 7: Citation stripping (any query that triggers retrieval)
+// curl -X POST http://localhost:3000/api/chat \
+//   -H "Content-Type: application/json" \
+//   -d '{"message": "What are Jordan'\''s key skills?", "history": []}'
+//
+// Expected: Answer with NO citation markers like 【0:0†source】 in the response
+// Expected: Check server logs for "[Chat API] Raw answer (truncated):" to verify raw logging
+// Expected: refused=false, confidence="high"
+//
+// Test 8: Knowledge-miss (should have no prefix, despite low confidence)
+// curl -X POST http://localhost:3000/api/chat \
+//   -H "Content-Type: application/json" \
+//   -d '{"message": "What is Jordan'\''s favorite food?", "history": []}'
+//
+// Expected: "I don't have that specific information in my knowledge base."
+// Expected: NO confidence prefix added (knowledge-miss is exempt)
+// Expected: refused=true, confidence="low"
+//
+// Test 9: Normal in-scope question (high confidence, no prefix)
+// curl -X POST http://localhost:3000/api/chat \
+//   -H "Content-Type: application/json" \
+//   -d '{"message": "What is Jordan'\''s professional background?", "history": []}'
+//
+// Expected: Normal answer with NO confidence prefix (high confidence doesn't need hedging)
+// Expected: refused=false, confidence="high", CTA appended
