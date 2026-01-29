@@ -6,6 +6,7 @@ const navItems = [
   { href: '/resume', label: 'Resume' },
   { href: '/work', label: 'Work' },
   { href: '/contact', label: 'Contact' },
+  { href: '/chat', label: 'Ask' },
 ]
 
 export function HeaderNav() {

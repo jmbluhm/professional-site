@@ -320,8 +320,23 @@ function getCTA(): string {
 // ============================================================================
 
 function stripRetrievalCitations(text: string): string {
-  // Removes patterns like 【0:0†source】 that sometimes appear in retrieved answers
-  return text.replace(/【\d+:\d+†[^】]+】/g, '').replace(/\n{3,}/g, '\n\n').trim()
+  // Removes citation patterns like 【0:0†source】 that sometimes appear in retrieved answers
+  // Also handles truncated/incomplete citations like 【5:3† or 【5:3†sour
+  let cleaned = text
+
+  // Remove complete citations: 【digits:digits†...】
+  cleaned = cleaned.replace(/【\d+:\d+†[^】]*】/g, '')
+
+  // Remove incomplete citations (missing closing bracket): 【digits:digits†...
+  cleaned = cleaned.replace(/【\d+:\d+†[^【\n]*/g, '')
+
+  // Remove any standalone 【 characters that might remain
+  cleaned = cleaned.replace(/【/g, '')
+
+  // Normalize excessive newlines
+  cleaned = cleaned.replace(/\n{3,}/g, '\n\n')
+
+  return cleaned.trim()
 }
 
 function applyConfidencePhrasing(answer: string, confidence: 'high' | 'medium' | 'low'): string {
@@ -350,11 +365,27 @@ function applyConfidencePhrasing(answer: string, confidence: 'high' | 'medium' |
   return a
 }
 
+function compressOververboseAnswer(text: string): string {
+  return text
+    .replace(/Key reasons and features include:\s*/i, '')
+    .replace(/This reflects Jordan's.*?\./i, '')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim()
+}
+
 // ============================================================================
 // System Prompt for Retrieval-Augmented Generation
 // ============================================================================
 
 const SYSTEM_PROMPT = `You are a recruiting assistant embedded on Jordan Bluhm's professional website. Your purpose is to help recruiters and hiring managers learn about Jordan's background, skills, and experience.
+
+STYLE & BREVITY RULES:
+- Prefer concise, conversational answers (3-5 sentences).
+- Avoid formal scaffolding phrases like "Key reasons include", "This reflects", "Demonstrates ability".
+- No section headers unless explicitly requested.
+- Use bullets only if they add clarity; max 3 bullets.
+- Write as if Jordan were answering verbally to a recruiter.
+- Default answer length under 120 words unless depth is explicitly requested.
 
 REFERENT RULES:
 - Before answering, determine what system the user is referring to (the website/chatbot itself vs Jordan's work).
@@ -680,6 +711,11 @@ export async function POST(request: NextRequest) {
 
     // Apply confidence-aware phrasing (before CTA append)
     answer = applyConfidencePhrasing(answer, responseConfidence)
+
+    // Apply compression to remove oververbose patterns (skip for refusals, knowledge-miss, clarifying questions)
+    if (!isKnowledgeMiss && !isClarifyingQuestion && !isWrongReferent) {
+      answer = compressOververboseAnswer(answer)
+    }
 
     // Ensure CTA is present (append unless direct contact method already included OR it's a clarifying question)
     const cta = getCTA()
