@@ -717,14 +717,10 @@ export async function POST(request: NextRequest) {
       answer = compressOververboseAnswer(answer)
     }
 
-    // Ensure CTA is present (append unless direct contact method already included OR it's a clarifying question)
+    // Only append CTA for refusals, knowledge-miss, or wrong referent responses
+    // Skip CTA for successful in-scope answers and clarifying questions
     const cta = getCTA()
-    const hasDirectContact =
-      lower.includes('mailto:') ||
-      lower.includes('linkedin.com') ||
-      (profile.basics.email && lower.includes(profile.basics.email.toLowerCase()))
-
-    if (!hasDirectContact && !isClarifyingQuestion) {
+    if ((isKnowledgeMiss || isWrongReferent) && !isClarifyingQuestion) {
       answer = `${answer}\n\n${cta}`
     }
 
