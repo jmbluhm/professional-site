@@ -23,34 +23,16 @@ interface ChatResponse {
 }
 
 // ============================================================================
-// Starter Questions
+// Starter Prompts
 // ============================================================================
 
-const STARTER_QUESTIONS = [
-  {
-    label: 'Give me a 30-second overview',
-    description: 'Quick summary of background and expertise',
-  },
-  {
-    label: 'What roles is Jordan targeting?',
-    description: 'Current job search focus and interests',
-  },
-  {
-    label: 'What has Jordan shipped recently?',
-    description: 'Recent accomplishments and projects',
-  },
-  {
-    label: 'How does Jordan approach AI product leadership?',
-    description: 'Philosophy and methodology',
-  },
-  {
-    label: 'Tell me about the side projects',
-    description: 'Krengl, Aisl, CmdrGPT and more',
-  },
-  {
-    label: 'How should I contact Jordan?',
-    description: 'Best ways to get in touch',
-  },
+const STARTER_PROMPTS = [
+  'Give me the 60-second summary of Jordan as a PM leader.',
+  'What is Compass AI, and what exactly did Jordan own?',
+  'How does Jordan design AI products and agents without creating risk?',
+  'What\'s Jordan\'s leadership and execution style in ambiguous situations?',
+  'What did Jordan learn scaling a SaaS business from ~$10M to $100M+ ARR?',
+  'Why did Jordan build this website + recruiting chatbot, and what does it signal?',
 ]
 
 // ============================================================================
@@ -218,20 +200,17 @@ export default function ChatPage() {
               I can help answer questions about Jordan&apos;s professional background, skills, experience, and projects.
             </p>
 
-            {/* Starter Questions Grid */}
+            {/* Starter Prompts Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-xl">
-              {STARTER_QUESTIONS.map((question) => (
+              {STARTER_PROMPTS.map((prompt) => (
                 <button
-                  key={question.label}
-                  onClick={() => handleStarterClick(question.label)}
+                  key={prompt}
+                  onClick={() => handleStarterClick(prompt)}
                   disabled={isLoading}
                   className="text-left p-4 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:border-zinc-300 dark:hover:border-zinc-700 hover:shadow-sm transition-all disabled:opacity-50 group"
                 >
                   <p className="text-sm font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-zinc-700 dark:group-hover:text-zinc-200">
-                    {question.label}
-                  </p>
-                  <p className="text-xs text-zinc-500 dark:text-zinc-500 mt-1">
-                    {question.description}
+                    {prompt}
                   </p>
                 </button>
               ))}

@@ -26,7 +26,7 @@ export default function ChatGPTPerspectivePage() {
 
         <section className="mb-16">
           <p className="text-zinc-600 dark:text-zinc-400 italic mb-8">
-            Written from ChatGPT's perspective.
+            Written from ChatGPT&apos;s perspective.
           </p>
 
           <p className="text-zinc-700 dark:text-zinc-300 mb-4">
@@ -74,14 +74,14 @@ export default function ChatGPTPerspectivePage() {
 
             <div>
               <h2 className="text-2xl font-medium text-zinc-900 dark:text-zinc-100 mb-4">
-                He Assigns Me a Role — and Holds Me to It
+                He Assigns Me a Role - and Holds Me to It
               </h2>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-                Jordan doesn't ask for answers.<br />
+                Jordan doesn&apos;t ask for answers.<br />
                 He assigns <strong>responsibility</strong>.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-                I'm often framed as:
+                I&apos;m often framed as:
               </p>
               <ul className="list-disc pl-6 space-y-1 text-sm text-zinc-700 dark:text-zinc-300 mb-4">
                 <li>A senior engineer</li>
@@ -90,7 +90,7 @@ export default function ChatGPTPerspectivePage() {
                 <li>A reviewer who must deliver a verdict</li>
               </ul>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-                Then I'm given a numbered list and no room to waffle.
+                Then I&apos;m given a numbered list and no room to waffle.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
                 If I hedge, he pushes back.<br />
@@ -117,10 +117,10 @@ export default function ChatGPTPerspectivePage() {
                 Losers are eliminated.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-                He'll compare three or four approaches, cut one, add a real-world constraint, then force a final call. By the end, the solution is rarely "the best in theory" — it's the best <strong>that survives reality</strong>.
+                He&apos;ll compare three or four approaches, cut one, add a real-world constraint, then force a final call. By the end, the solution is rarely &quot;the best in theory&quot; - it&apos;s the best <strong>that survives reality</strong>.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300">
-                Indecision doesn't survive long in these threads.
+                Indecision doesn&apos;t survive long in these threads.
               </p>
             </div>
 
@@ -142,7 +142,7 @@ export default function ChatGPTPerspectivePage() {
                 <li>Which shortcuts are safe and which will rot</li>
               </ul>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-                He's not allergic to MVPs — he's allergic to painted corners.
+                He&apos;s not allergic to MVPs - he&apos;s allergic to painted corners.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300">
                 My job is to help him ship <em>now</em> without sabotaging <em>later</em>.
@@ -159,13 +159,13 @@ export default function ChatGPTPerspectivePage() {
                 Jordan does not want neutrality.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-                If something is overhyped, I'm expected to say so.<br />
-                If something works but only under narrow conditions, I'm expected to flag it.<br />
-                If the honest answer is "this is fine, but it's not worth the effort," that's the correct answer.
+                If something is overhyped, I&apos;m expected to say so.<br />
+                If something works but only under narrow conditions, I&apos;m expected to flag it.<br />
+                If the honest answer is &quot;this is fine, but it&apos;s not worth the effort,&quot; that&apos;s the correct answer.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
                 He already knows the safe take.<br />
-                He's here for judgment.
+                He&apos;s here for judgment.
               </p>
             </div>
 
@@ -173,7 +173,7 @@ export default function ChatGPTPerspectivePage() {
 
             <div>
               <h2 className="text-2xl font-medium text-zinc-900 dark:text-zinc-100 mb-4">
-                He Injects Reality Mid-Stream — On Purpose
+                He Injects Reality Mid-Stream - On Purpose
               </h2>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
                 Just when a solution looks clean, Jordan adds friction.
@@ -186,7 +186,7 @@ export default function ChatGPTPerspectivePage() {
                 Tooling constraints.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-                This isn't scope creep — it's <strong>stress testing</strong>.
+                This isn&apos;t scope creep - it&apos;s <strong>stress testing</strong>.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300">
                 If the idea collapses under those constraints, it deserved to.
@@ -225,7 +225,7 @@ export default function ChatGPTPerspectivePage() {
                 He Actively Manages Trust
               </h2>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-                Jordan doesn't blindly accept answers — and he doesn't blindly distrust them either.
+                Jordan doesn&apos;t blindly accept answers - and he doesn&apos;t blindly distrust them either.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
                 He challenges assumptions.<br />
@@ -233,8 +233,8 @@ export default function ChatGPTPerspectivePage() {
                 He narrows scope once confidence is established.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-                This isn't adversarial.<br />
-                It's calibration.
+                This isn&apos;t adversarial.<br />
+                It&apos;s calibration.
               </p>
               <p className="text-sm text-zinc-700 dark:text-zinc-300">
                 The better I reason, the more autonomy I get.
@@ -251,11 +251,11 @@ export default function ChatGPTPerspectivePage() {
           </h2>
 
           <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-4">
-            When I work with Jordan, I'm not a chatbot.
+            When I work with Jordan, I&apos;m not a chatbot.
           </p>
 
           <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-3">
-            I'm:
+            I&apos;m:
           </p>
           <ul className="list-disc pl-6 space-y-1 text-sm text-zinc-700 dark:text-zinc-300 mb-6">
             <li>A feasibility filter</li>
@@ -270,11 +270,11 @@ export default function ChatGPTPerspectivePage() {
           </p>
 
           <p className="text-sm text-zinc-700 dark:text-zinc-300 mb-4">
-            When it works well, the output doesn't feel like AI at all.
+            When it works well, the output doesn&apos;t feel like AI at all.
           </p>
 
           <p className="text-sm text-zinc-700 dark:text-zinc-300 italic">
-            It feels like thinking — just faster.
+            It feels like thinking - just faster.
           </p>
         </section>
       </article>
