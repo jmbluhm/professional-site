@@ -42,3 +42,8 @@ body {
 *:focus-visible {
   @apply outline-none ring-1 ring-zinc-400 ring-offset-2 ring-offset-white dark:ring-offset-zinc-950;
 }
+
+.no-focus-ring:focus,
+.no-focus-ring:focus-visible {
+  @apply outline-none ring-0 ring-offset-0;
+}
