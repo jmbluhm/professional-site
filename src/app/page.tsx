@@ -58,7 +58,7 @@ export default function Home() {
         <div className="mb-8">
           <a
             href="/content/chatgpt-perspective"
-            className="flex items-center gap-2 font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
+            className="flex items-center gap-2 text-sm md:text-base font-medium hover:text-zinc-600 dark:hover:text-zinc-400"
             style={{ color: '#D97757' }}
           >
             <svg
