@@ -28,11 +28,11 @@ interface ChatResponse {
 
 const STARTER_PROMPTS = [
   'Give me the 60-second summary of Jordan as a PM leader.',
-  'What is Compass AI, and what exactly did Jordan own?',
-  'How does Jordan design AI products and agents without creating risk?',
-  'What\'s Jordan\'s leadership and execution style in ambiguous situations?',
-  'What did Jordan learn scaling a SaaS business from ~$10M to $100M+ ARR?',
-  'Why did Jordan build this website + recruiting chatbot, and what does it signal?',
+  'What is Compass AI, and what exactly does Jordan own?',
+  'How does Jordan think about risk when designing AI products and agents?',
+  'Can I download Jordan\'s resume?',
+  'What\'s the best way to get ahold of Jordan?',
+  'Why did Jordan build this chatbot, and how was it made?',
 ]
 
 // ============================================================================
@@ -134,6 +134,10 @@ export default function ChatPage() {
       console.error('Chat error:', err)
     } finally {
       setIsLoading(false)
+      // Refocus input after sending
+      setTimeout(() => {
+        inputRef.current?.focus()
+      }, 0)
     }
   }, [isLoading, messages, sessionId])
 
