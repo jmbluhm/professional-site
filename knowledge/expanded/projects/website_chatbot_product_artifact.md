@@ -1,161 +1,237 @@
-# This Website and Chatbot as a Product Artifact
+import { NextRequest, NextResponse } from 'next/server'
+import { OpenAI } from 'openai-edge'
+import { redis } from '@/lib/redis'
+import { logRequest } from '@/lib/log'
+import { rateLimit } from '@/lib/rate-limit'
+import { getKnowledgeFiles, fileSearch } from '@/lib/knowledge'
+import { isAllowedTopic, isSiteAction, routeSiteAction } from '@/lib/site-actions'
+import { classifyIntent } from '@/lib/intent-classifier'
 
----
-id: website_chatbot_product_artifact
-version: 2
-type: project
-audience: [recruiter, hiring_manager]
-tags: [personal-website, chatbot, product-thinking, ai-system, retrieval-grounded, constraints, boundaries, intentional-design, portfolio, signal, professionalism, guardrails, demonstration]
-last_updated: 2026-01-29
-source: knowledge-2.md
----
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY
+const OPENAI_MODEL = process.env.OPENAI_MODEL || 'gpt-4o-mini'
+const SESSION_SUMMARY_TTL_SECONDS = 3600
+const MAX_SESSION_SUMMARY_CHARS = 700
+const SUMMARY_UPDATE_EVERY_N_MESSAGES = 2
+const SUMMARY_MODEL = process.env.OPENAI_SUMMARY_MODEL || process.env.OPENAI_MODEL || 'gpt-4o-mini'
+const SUMMARY_MAX_TOKENS = 120
 
-## Intentional Design
+const sessionSummaryStore = new Map<string, { summary: string; createdAt: number }>()
 
-Jordan's personal website and embedded chatbot are treated as a real product, not a static portfolio or marketing site.
+async function getSessionSummary(sessionId: string): Promise<string> {
+  if (redis) {
+    const summary = await redis.get(`session:${sessionId}:summary`)
+    return summary || ''
+  } else {
+    const entry = sessionSummaryStore.get(sessionId)
+    if (!entry) return ''
+    if (Date.now() - entry.createdAt > SESSION_SUMMARY_TTL_SECONDS * 1000) {
+      sessionSummaryStore.delete(sessionId)
+      return ''
+    }
+    return entry.summary
+  }
+}
 
-The goal is not visual novelty, but:
+async function setSessionSummary(sessionId: string, summary: string): Promise<void> {
+  if (redis) {
+    await redis.set(`session:${sessionId}:summary`, summary, {
+      ex: SESSION_SUMMARY_TTL_SECONDS,
+    })
+  } else {
+    sessionSummaryStore.set(sessionId, { summary, createdAt: Date.now() })
+  }
+}
 
-- Clear signal of how Jordan thinks
-- Accurate representation of professional scope
-- Respect for user time and intent
-- Thoughtful application of AI rather than novelty-driven usage
+function looksLikeBroadQuestion(message: string): boolean {
+  const t = message.toLowerCase()
+  const broadPatterns = [
+    /\bwhy\b.*\bhow\b/,
+    /\btell me about\b/,
+    /\boverview\b/,
+    /\barchitecture\b/,
+    /\bhow was (this|it) made\b/,
+  ]
+  const bigObjects = ['this chatbot', 'the chatbot', 'this site', 'the site', 'jordan', 'his background', 'his experience']
+  return broadPatterns.some(p => p.test(t)) && bigObjects.some(s => t.includes(s))
+}
 
-Every element exists to communicate something intentionally.
+function looksLikeFollowUp(message: string): boolean {
+  const t = message.toLowerCase().trim()
+  return (
+    t.length <= 40 &&
+    (
+      t === 'more' ||
+      t === 'go deeper' ||
+      t === 'tell me more' ||
+      t.includes('more about') ||
+      t.includes('that') ||
+      t.includes('the last') ||
+      t.includes('expand') ||
+      t.includes('details') ||
+      t.includes('dive in')
+    )
+  )
+}
 
-## What This Is and Is Not
+type ChatMessage = { role: 'user' | 'assistant'; content: string }
 
-This site is deliberately not built using one-click site builders or generic AI wrappers. It is designed and implemented with the same principles Jordan applies to production products:
+function buildSystemPrompt(sessionSummary: string, recentChat: ChatMessage[]): string {
+  const recentChatStr = recentChat
+    .map(m => (m.role === 'user' ? `User: ${m.content}` : `Assistant: ${m.content}`))
+    .join('\n')
 
-- Explicit scope and constraints
-- Clear ownership and boundaries
-- Emphasis on reliability over cleverness
-- Conscious tradeoffs between effort and value
+  return `You are a helpful assistant answering questions about Jordan Bluhm's personal website and embedded chatbot system.
 
-At the same time, it avoids unnecessary complexity or over-engineering.
+SESSION_SUMMARY:
+${sessionSummary}
 
-## The Chatbot as a System, Not a Gimmick
+RECENT_CHAT:
+${recentChatStr}
 
-The embedded chatbot is designed as a constrained, retrieval-grounded system rather than an open-ended conversational agent.
+Instructions:
+- Answer ONLY using retrieved content from the knowledge base.
+- Call file_search at most once per user message.
+- Keep answers concise: 1 sentence plus up to 4 bullet points.
+- If the user's question is broad or ambiguous, answer briefly then ask ONE clarifying question with 2–4 specific options:
+  (1) Architecture/routing
+  (2) RAG/knowledge
+  (3) Product intent
+  (4) How it maps to professional experience
+- If the user asks a follow-up (e.g., "more", "go deeper"), use the SESSION_SUMMARY and recent retrieved content to pick the most likely dimension to expand on.
+  If ambiguous, ask the same clarifying question as above.
+- Never invent information; only use retrieved knowledge.
+- Output format: concise answer + bullets, then either a call to action or a call to action plus a single guided question (max 1 sentence).
+`
+}
 
-Key characteristics include:
+const openai = new OpenAI({
+  apiKey: OPENAI_API_KEY,
+})
 
-- Responses grounded in a curated knowledge base
-- Clear boundaries around allowed topics
-- Explicit handling of uncertainty and missing information
-- Guardrails to prevent hallucination or inappropriate responses
+export async function POST(req: NextRequest) {
+  try {
+    await rateLimit(req)
 
-This mirrors how Jordan approaches AI features in production environments: useful, bounded, and trustworthy.
+    const body = await req.json()
+    const { message, sessionId, history } = body
 
-## Technical Approach and Architecture (High-Level)
+    // Basic validation
+    if (typeof message !== 'string' || !message.trim()) {
+      return NextResponse.json({ error: 'Invalid message' }, { status: 400 })
+    }
+    if (typeof sessionId !== 'string' || !sessionId.trim()) {
+      return NextResponse.json({ error: 'Missing sessionId' }, { status: 400 })
+    }
 
-Jordan built this chatbot as a production-minded AI system rather than a demo or novelty feature. While the surface experience is intentionally simple, the underlying architecture reflects real-world AI product constraints and tradeoffs.
+    // Check if site action
+    if (isSiteAction(message)) {
+      const actionResponse = await routeSiteAction(message)
+      await logRequest(req, {
+        sessionSummaryPresent: false,
+        broadQuestion: false,
+        followUp: false,
+      })
+      return NextResponse.json({ response: actionResponse })
+    }
 
-At a high level, the system is:
+    // Intent classification
+    const intent = await classifyIntent(message)
 
-- A Node.js application hosted on Vercel
-- Integrated with OpenAI APIs for language understanding and retrieval
-- Backed by a curated, versioned markdown knowledge base indexed via vector search (RAG)
-- Designed with explicit intent classification, routing, and guardrails
+    // Disallowed gating
+    if (!isAllowedTopic(message)) {
+      await logRequest(req, {
+        sessionSummaryPresent: false,
+        broadQuestion: false,
+        followUp: false,
+      })
+      return NextResponse.json({ response: "Sorry, I can't answer that topic." })
+    }
 
-The goal is not maximum autonomy, but maximum reliability per dollar and per user interaction.
+    // Retrieve session summary
+    let sessionSummary = await getSessionSummary(sessionId)
 
-### Core System Components
+    // Detect broad question or follow-up
+    const broadQuestion = looksLikeBroadQuestion(message)
+    const followUp = looksLikeFollowUp(message)
 
-#### Intent Classification and Routing
+    // Build system prompt with session summary and recent chat (last 4 messages)
+    const recentChat = Array.isArray(history) && history.length > 0
+      ? history.slice(-4).map((m: any) => ({
+          role: m.role === 'assistant' ? 'assistant' : 'user',
+          content: m.content || '',
+        }))
+      : []
 
-Before invoking a language model, the system evaluates user input to determine intent:
+    const systemPrompt = buildSystemPrompt(sessionSummary, recentChat)
 
-- Navigation or site actions (for example, downloading a resume or opening writing)
-- Allowed professional questions
-- Disallowed or out-of-scope topics
+    // RAG: retrieve knowledge files
+    const knowledgeFiles = await getKnowledgeFiles()
+    const retrieved = await fileSearch(message, knowledgeFiles)
 
-This ensures that:
-- The language model is only used when it adds real value
-- Simple requests are handled deterministically without unnecessary cost
-- Safety and scope boundaries are enforced consistently
+    // Compose messages for OpenAI
+    const messages = [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: message },
+      { role: 'system', content: `RETRIEVED_CONTENT:\n${retrieved}` },
+    ]
 
-Many user interactions are resolved without calling an LLM at all.
+    // Call OpenAI chat completion
+    const completion = await openai.chat.completions.create({
+      model: OPENAI_MODEL,
+      messages,
+      temperature: 0.3,
+      max_tokens: 800,
+    })
 
-#### Retrieval-Augmented Generation (RAG)
+    const responseText = completion.choices[0].message?.content || ''
 
-For informational questions, the chatbot uses a retrieval-grounded approach:
+    // Update session summary only for RAG path and successful response
+    if (retrieved && responseText && !isSiteAction(message)) {
+      // Count messages in session (approximate)
+      const newCount = (history?.length || 0) + 1
+      if (newCount % SUMMARY_UPDATE_EVERY_N_MESSAGES === 0 || followUp) {
+        try {
+          // Build summarization prompt
+          const summaryPrompt = [
+            {
+              role: 'system',
+              content: `You are a summarization assistant. Generate a compact third-person summary focusing on what the user asked, how the assistant answered, and any chosen depth or follow-up dimension. Limit output to ${MAX_SESSION_SUMMARY_CHARS} characters.`,
+            },
+            {
+              role: 'user',
+              content: `User question: ${message}\nAssistant answer: ${responseText}\nCurrent summary: ${sessionSummary}`,
+            },
+          ]
 
-- Knowledge is authored as structured markdown files
-- Files are versioned, reviewed, and hydrated into a vector store
-- The model is instructed to answer only using retrieved content
-- If information is missing, the system is designed to explicitly say so
+          const summaryCompletion = await openai.chat.completions.create({
+            model: SUMMARY_MODEL,
+            messages: summaryPrompt,
+            temperature: 0.2,
+            max_tokens: SUMMARY_MAX_TOKENS,
+          })
 
-This avoids hallucination and keeps responses anchored to real, auditable sources.
+          let newSummary = summaryCompletion.choices[0].message?.content || ''
+          if (newSummary.length > MAX_SESSION_SUMMARY_CHARS) {
+            newSummary = newSummary.slice(0, MAX_SESSION_SUMMARY_CHARS)
+          }
+          await setSessionSummary(sessionId, newSummary)
+          console.log(`[Chat API] Session summary updated: ${newSummary.slice(0, 60)}...`)
+          sessionSummary = newSummary
+        } catch (e) {
+          // Ignore summary update errors
+        }
+      }
+    }
 
-#### Cost and Performance Optimization
+    await logRequest(req, {
+      sessionSummaryPresent: !!sessionSummary,
+      broadQuestion,
+      followUp,
+    })
 
-The system is intentionally optimized for:
-
-- Low latency
-- Predictable operating cost
-- Minimal token usage
-
-Techniques include:
-- Short context windows
-- Strict output constraints
-- Conditional model invocation
-- Lightweight models where appropriate
-- Avoidance of multi-step agent loops
-
-This mirrors how Jordan approaches AI features in production environments: sustainability over spectacle.
-
-#### Guardrails and Boundaries
-
-The chatbot enforces multiple layers of control:
-
-- Topic allowlists and disallowlists
-- Session and rate limits
-- Explicit handling of uncertainty
-- No autonomous tool creation or free-form agent behavior
-
-These constraints are intentional and reflect enterprise-grade AI design practices.
-
-#### Tool-Like Behavior Without Over-Abstraction
-
-While the system does not expose traditional function calling publicly, it uses tool-like routing internally:
-
-- Site actions are resolved through a fixed resource catalog
-- Navigation and downloads are deterministic
-- The model may help classify intent, but never invents actions or URLs
-
-This keeps behavior predictable while still benefiting from natural language understanding.
-
-### Why This Architecture Was Chosen
-
-Jordan intentionally avoided:
-
-- Fully autonomous agents
-- One-click AI site builders
-- Prompt-only “magic” systems
-- Over-engineered orchestration layers
-
-Instead, the chatbot demonstrates judgment about where AI helps versus where it introduces risk, and shows comfort designing bounded systems that can actually be operated over time.
-## Why Expose This at All
-
-Jordan intentionally exposes this system—at a high level—to demonstrate how he thinks about AI, products, and systems in practice.
-
-The goal is not to showcase technical cleverness, but to signal:
-
-- Respect for constraints and safety
-- Preference for durable systems over demos
-- Willingness to build real things, even when unnecessary
-- Comfort operating across strategy, execution, and iteration
-
-For recruiters and collaborators, the site itself is a living example of Jordan's approach.
-
-## What This Signals to Teams
-
-Teams working with Jordan can expect:
-
-- Thoughtful use of AI rather than indiscriminate application
-- Clear articulation of system boundaries
-- Willingness to prototype to resolve ambiguity
-- Focus on building things that can actually be operated
-
-The website and chatbot are not the point—they are evidence of how Jordan approaches problems.
+    return NextResponse.json({ response: responseText })
+  } catch (error: any) {
+    console.error('[Chat API] Error:', error)
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
+  }
+}
