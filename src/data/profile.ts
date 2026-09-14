@@ -52,7 +52,7 @@ export interface Profile {
 export const profile: Profile = {
   basics: {
     name: 'Jordan Bluhm',
-    label: 'Principal Product Manager — AI',
+    label: 'Head of Product',
     summary:
       'Principal-level Product Leader with 10+ years of experience building AI-native platforms, developer ecosystems, and enterprise SaaS products. Deeply technical, with a strong bias toward systems thinking, API design, and applied AI. Proven ability to translate emerging technologies (LLMs, agent frameworks, MCP, vector search) into scalable, revenue-generating products.',
     location: 'Broomfield, CO',
@@ -72,9 +72,9 @@ export const profile: Profile = {
     ],
   },
   headlines: {
-    heroHeadline: 'Building AI-native platforms for subscription businesses',
+    heroHeadline: 'Building AI-native products for commerce and lifecycle marketing',
     heroSubhead:
-      'Principal Product Manager (AI) at Recurly. Leading Compass, delivering agentic systems, MCP tooling, and AI-powered subscription management.',
+      'Head of Product at PostPilot, building AI-powered direct-mail and retention marketing for ecommerce brands — backed by a decade in developer tools, APIs, and enterprise SaaS.',
     ctaHelper: 'Same data. Different render.',
   },
   capabilities: [
@@ -95,25 +95,37 @@ export const profile: Profile = {
     },
   ],
   proofBullets: [
-    'Leading Compass, Recurly\'s AI platform — vision, architecture, and launches',
+    'Leading product at PostPilot — AI-powered direct-mail and retention marketing for ecommerce brands',
+    'Built Compass, Recurly\'s AI platform — vision, architecture, and launches',
     'Studying and shaping protocols for AI-to-system connectivity (MCP, agents, tooling)',
     'Rapid prototyping wherever it\'s useful: code, laser cutting, 3D printing',
     'Tuning and playtesting Magic: The Gathering decks with The Fancy Cardboard Club',
     'Getting outside with my wife and our dogs',
   ],
   nowBullets: [
-    'Shipping Recurly\'s merchant-facing AI assistant with Google Agent Developer Kit',
-    'Designing MCP-based secure agent architecture for AI automation',
-    'Building AI evaluation and governance pipelines for safe production rollout',
+    'Leading product for PostPilot\'s AI-powered direct-mail marketing platform',
+    'Shaping how AI and integrations connect physical mail with ecommerce and lifecycle marketing',
+    'Rapid prototyping across code, laser cutting, and 3D printing',
     'Tuning MTG Commander decks as a systems exercise',
   ],
   resume: {
     experience: [
       {
+        company: 'PostPilot',
+        title: 'Head of Product',
+        startDate: 'March 2026',
+        endDate: 'Present',
+        bullets: [
+          'Lead product for PostPilot, an AI-powered direct-mail marketing platform helping ecommerce and DTC brands drive retention and new-customer acquisition',
+          'Own product vision, strategy, and roadmap spanning prospecting, retention, and lifecycle automation',
+          'Drive AI and integration initiatives that connect physical mail with brands\' ecommerce and marketing stacks',
+        ],
+      },
+      {
         company: 'Recurly',
         title: 'Principal Product Manager – AI',
         startDate: 'May 2025',
-        endDate: 'Present',
+        endDate: 'March 2026',
         bullets: [
           'Lead Compass, Recurly\'s AI division, owning vision, architecture, and execution of AI-powered subscription management tools',
           'Launched merchant-facing AI assistant leveraging Google Agent Developer Kit for conversational access to documentation, API help, and account insights',
